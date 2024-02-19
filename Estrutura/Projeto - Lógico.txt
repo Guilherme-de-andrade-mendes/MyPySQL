@@ -1,0 +1,29 @@
+DEPARTAMENTO(codDep, nome)
+
+USUARIO(codUsu,codDep, nome)
+    codDep: FK DEPARTAMENTO(codDep)
+
+DISPOSITIVO(codDisp,codUsu,estado,alocacao,montagem,nota_fiscal,sistema_operacional,chave_ativacao,conexao_rede,data_atualizacao)
+    codUsu: FK USUARIO(codUsu)
+
+COMPONENTE(codComp,codDisp,descricao,quantidade)
+    codDisp: FK DISPOSITIVO(codDisp)
+
+PLACA_MAE(codComp,tipagem,slot_Ram)
+    codComp: FK COMPONENTE(codComp)
+
+MEMORIA(codComp,capacidade,tipagem)
+    codComp: FK COMPONENTE(codComp)
+
+PROCESSADOR(codComp,velocidade)
+    codComp: FK COMPONENTE(codComp)
+
+ARMAZENAMENTO(codComp,espaco)
+    codComp: FK COMPONENTE(codComp)
+
+FONTE(codComp,voltagem)
+    codComp: FK COMPONENTE(codComp)
+
+PLACA_GRAFICA(codComp,marca,entrada,ram)
+    codComp: FK COMPONENTE(codComp)
+
