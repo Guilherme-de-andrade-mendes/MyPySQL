@@ -1,29 +1,25 @@
-DEPARTAMENTO(codDep, nome)
+usuario(codUsu,nome, estado, departamento)
 
-USUARIO(codUsu,codDep, nome)
-    codDep: FK DEPARTAMENTO(codDep)
+dispositivo(codDisp,codUsu,estado,alocacao,montagem,nota_fiscal,sistema_operacional,chave_ativacao,conexao_rede,data_atualizacao)
+    codUsu: FK usuario(codUsu)
 
-DISPOSITIVO(codDisp,codUsu,estado,alocacao,montagem,nota_fiscal,sistema_operacional,chave_ativacao,conexao_rede,data_atualizacao)
-    codUsu: FK USUARIO(codUsu)
+componente(codComp,codDisp,descricao,quantidade)
+    codDisp: FK dispositivo(codDisp)
 
-COMPONENTE(codComp,codDisp,descricao,quantidade)
-    codDisp: FK DISPOSITIVO(codDisp)
+placaMae(codComp,tipagem,slot_Ram)
+    codComp: FK componente(codComp)
 
-PLACA_MAE(codComp,tipagem,slot_Ram)
-    codComp: FK COMPONENTE(codComp)
+memoria(codComp,capacidade,tipagem, voltagem)
+    codComp: FK componente(codComp)
 
-MEMORIA(codComp,capacidade,tipagem)
-    codComp: FK COMPONENTE(codComp)
+processador(codComp,velocidade)
+    codComp: FK componente(codComp)
 
-PROCESSADOR(codComp,velocidade)
-    codComp: FK COMPONENTE(codComp)
+armazenamento(codComp,espaco)
+    codComp: FK componente(codComp)
 
-ARMAZENAMENTO(codComp,espaco)
-    codComp: FK COMPONENTE(codComp)
+fonte(codComp,watts)
+    codComp: FK componente(codComp)
 
-FONTE(codComp,voltagem)
-    codComp: FK COMPONENTE(codComp)
-
-PLACA_GRAFICA(codComp,marca,entrada,ram)
-    codComp: FK COMPONENTE(codComp)
-
+placaGrafica(codComp,marca,entrada,ram)
+    codComp: FK componente(codComp)

@@ -1,17 +1,12 @@
-create database prmns_testes;
+create database prmns;
 
-use prmns_testes;
-
-create table departamento(
-	codDep int auto_increment primary key,
-    nome varchar(20)
-);
+use prmns;
 
 create table usuario(
-	codUsu int auto_increment primary key,
-    codDep int,
+    codUsu int unique primary key not null,
     nome varchar(100) not null,
-    constraint foreign key (codDep) references departamento(codDep)
+    estado varchar(7) not null,
+    departamento varchar(20)
 );
 
 create table dispositivo(
@@ -25,7 +20,7 @@ create table dispositivo(
     chave_ativacao varchar(29) not null unique,
     conexao_rede varchar(8) not null,
     data_atualizacao date,
-    constraint foreign key (codUsu) references usuario(codUsu)
+    constraint pk_usuario foreign key (codUsu) references usuario(codUsu)
 );
 
 create table componente(
@@ -33,45 +28,46 @@ create table componente(
     codDisp varchar(10),
     descricao varchar(50) not null,
     quantidade int not null,
-    constraint foreign key (codDisp) references dispositivo(codDisp)
+    constraint pk_dispositivo foreign key (codDisp) references dispositivo(codDisp)
 );
 
-create table placa_mae(
+create table placaMae(
 	codComp varchar(10),
     tipagem varchar(4) not null,
     slot_ram int not null,
-    constraint foreign key (codComp) references componente(codComp)
+    constraint pk_componente foreign key (codComp) references componente(codComp)
 );
 
 create table memoria(
 	codComp varchar(10),
-    capacidade varchar(4) not null,
+    capacidade varchar(5) not null,
     tipagem varchar(4) not null,
-    constraint foreign key (codComp) references componente(codComp)
+    voltagem varchar(6) not null,
+    constraint pk_comp_memoria foreign key (codComp) references componente(codComp)
 );
 
 create table processador(
 	codComp varchar(10),
     velocidade varchar(6) not null,
-    constraint foreign key (codComp) references componente(codComp)
+    constraint pk_comp_processador foreign key (codComp) references componente(codComp)
 );
 
 create table armazenamento(
 	codComp varchar(10),
     espaco int not null,
-    constraint foreign key (codComp) references componente(codComp)
+    constraint pk_comp_armazenamento foreign key (codComp) references componente(codComp)
 );
 
 create table fonte(
 	codComp varchar(10),
-    voltagem varchar(10) not null,
-    constraint foreign key (codComp) references componente(codComp)
+    watts varchar(10) not null,
+    constraint pk_comp_fonte foreign key (codComp) references componente(codComp)
 );
 
-create table placa_grafica(
+create table placaGrafica(
 	codComp varchar(10),
     marca varchar(20) not null,
     entrada varchar(10) not null,
-    ram varchar(4) not null,
-    constraint foreign key (codComp) references componente(codComp)
+    ram varchar(5) not null,
+    constraint pk_comp_pgrafica foreign key (codComp) references componente(codComp)
 );
